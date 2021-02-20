@@ -7,7 +7,7 @@ const initialState = {
 const contactListReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOAD_CONTACT_LIST":
-      console.log("Reducer => ", action.payload);
+      // console.log("Reducer => ", action.payload);
       return {
         ...state,
         loading: false,

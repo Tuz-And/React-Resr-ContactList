@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import "./AddContact.css";
+import Header from "../Header/header";
+
 
 class AddContact extends React.Component {
   state = {
@@ -62,6 +64,7 @@ class AddContact extends React.Component {
     return (
       <div className="container">
         <div className="row">
+          <Header />
           <div className="col-md-12">
             <form onSubmit={this.onSendData}>
               <div class="form-group">

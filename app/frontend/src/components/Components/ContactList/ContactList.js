@@ -18,7 +18,7 @@ class ContactList extends React.Component {
     contactListService
       .updateData()
       .then((data) => {
-        console.log("LIST ", data.List);
+        // console.log("LIST ", data.List);
         getContactList(data.List);
       })
       .catch((err) => console.log(err));
@@ -87,7 +87,7 @@ class ContactList extends React.Component {
   }
 }
 const mapStateToProps = ({ contactListReducer }) => {
-  console.log("mapStateToProps ", contactListReducer);
+  // console.log("mapStateToProps ", contactListReducer);
   const { List, loading } = contactListReducer;
   return { List, loading };
 };

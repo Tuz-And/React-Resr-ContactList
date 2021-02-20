@@ -28,15 +28,15 @@ export default class ContactListService {
     return List;
   }
 
-  //   async onSaveData(List) {
-  //     await fetch(this.DB_URL, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(List),
-  //     });
-  //   }
+    async onSaveData(List) {
+      await fetch(this.DB_URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(List),
+      });
+    }
 
   //   onStatusChange = (id) => {
   //     const index = this.state.List.findIndex((elem) => elem.id === id);
