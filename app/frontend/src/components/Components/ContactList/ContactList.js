@@ -3,9 +3,13 @@ import ContactItem from "./ContactItem/ContactItem";
 import ContactListService from "../../Services/ContactListService";
 import Loader from "../Spinner/Spinner";
 import Header from "../Header/header";
+import deleteData from './ContactItem/DeleteContactItem';
+import { Redirect } from "react-router-dom";
+
+
 
 // Actions
-import { getContactList } from "../../Actions/ContactListActions";
+import { getContactList, deleteContac } from "../../Actions/ContactListActions";
 
 // Connect to redux
 import { connect } from "react-redux";
@@ -13,8 +17,15 @@ import { connect } from "react-redux";
 const contactListService = new ContactListService();
 
 class ContactList extends React.Component {
+  state = {
+    flag:true
+  }
+
   componentDidMount() {
+    // console.log('delContactReducer +++++++++++ ',this.props.delContact)
+    
     const { getContactList } = this.props;
+    
     contactListService
       .updateData()
       .then((data) => {
@@ -22,11 +33,28 @@ class ContactList extends React.Component {
         getContactList(data.List);
       })
       .catch((err) => console.log(err));
+
+      
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('delContactReducer +++++++++++ ',this.props.contactId)
+
+    if (prevProps.contactId!== this.props.contactId) {
+      deleteData(this.props.contactId);
+      // this.setState(flag=!prevstate);
+ 
+    }
+    // useState();
   }
 
   render() {
-    console.log("props ", this.props);
-    const { List = [], loading = true } = this.props;
+    // console.log("props++++++++++++ ", this.props);
+    const { List = [], loading = true ,contactId=null} = this.props;
+    console.log("props++++++++++++ ", contactId);
+    // if(contactId!==null){
+    //   deleteData(contactId)
+    // }
     if (loading) {
       return <Loader />;
     }
@@ -62,6 +90,7 @@ class ContactList extends React.Component {
                           return (
                             <ContactItem
                               key={item.id}
+                              id={item.id}
                               name={item.name}
                               role={item.role}
                               avatar={item.avatar}
@@ -86,13 +115,15 @@ class ContactList extends React.Component {
     );
   }
 }
-const mapStateToProps = ({ contactListReducer }) => {
-  // console.log("mapStateToProps ", contactListReducer);
-  const { List, loading } = contactListReducer;
-  return { List, loading };
+
+  const mapStateToProps = ({ contactListReducer }) => {
+    const { List, loading ,contactId} = contactListReducer;
+  return ({ List, loading,contactId} )
 };
 
 const mapDispatchToProps = {
   getContactList,
+  // deleteContac,
+
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

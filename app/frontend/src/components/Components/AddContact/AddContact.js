@@ -11,10 +11,9 @@ class AddContact extends React.Component {
     role: "",
     avatar: "",
     status: "activ",
-   
     email: "",
     gender: "",
-    // isRedirect: false,
+    isRedirect: false,
 
   };
 
@@ -51,57 +50,39 @@ class AddContact extends React.Component {
     });
   };
 
-  // onSendData = (event) => {
-  //   event.preventDefault();
-  //   const { name, role, avatar, surname, email, gender } = this.state;
-  //   this.props.onCreate(name, role, avatar, surname, email, gender);
-  //   this.setState({
-  //     isRedirect: true,
-  //   });
-  // };
-
 
   handleSubmit = (event) => {
-    //alert('A list was submitted: ' + this.state.formvalue);
     event.preventDefault();
-    // const { name, role, avatar, surname, email, gender } = this.state;
-    // this.setState({
-        //   isRedirect: true,
-        // });
-    console.log('+++++++++++++++', this.state.name)
+    this.setState({
+          isRedirect: true,
+        });
       
     fetch('http://localhost:8000/api/contacts/', {
-        method: 'POST',
-        headers: {
+      method: 'POST',
+      headers: {
                 "Content-Type": "application/json",
-              },
-       body: JSON.stringify(this.state
-          // {
-        // name: this.state.name,
-        // role: this.state.role,
-        // avatar: this.state.avatar,
-        // surname: this.state.surname,
-        // status: this.state.status,
-        // email: this.state.email,
-        // gender: this.state.gender,
-  
-      // }
-      )
-   })
-   .then(function(response) {
-    console.log(response)
-    return response.json();
-  });
-  //  .then(res => res.json())
-  //  .then(data => console.log(data))
-  //  .catch(err => console.log(err));
-  }
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        surname: this.state.surname,
+        role: this.state.role,
+        avatar: this.state.avatar,
+        status: this.state.status,
+        email: this.state.email,
+        gender: this.state.gender,
+      })
+      })
+      .then(function(response) {
+        console.log(response)
+        return response.json();
+      });
+    }
 
 
   render() {
-    // if (this.state.isRedirect) {
-    //   return <Redirect to="/" />;
-    // }
+    if (this.state.isRedirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="container">
         <div className="row">
@@ -174,10 +155,9 @@ class AddContact extends React.Component {
 
               <div className="form-group">
                 <div>
-                  {/* <button type="submit" className="btn btn-default">
+                  <button type="submit" className="btn btn-default">
                     Add contact
-                  </button> */}
-                  <input type="submit" value="Submit" />
+                  </button>
                 </div>
               </div>
             </form>

@@ -13,9 +13,10 @@ export const getCurrentContact = (currentContact) => {
 };
 
 
-// export const addContactList = (contact) => {
-//   return {
-//     type: "ADD_CONTACT_LIST",
-//     payload: contact,
-//   };
-// };
+export const deleteContac = (contactId) => {
+  // alert('delete contact id: ' + contactId)
+  return {
+    type: "DELETE_CONTACT",
+    payload: contactId,
+  };
+};

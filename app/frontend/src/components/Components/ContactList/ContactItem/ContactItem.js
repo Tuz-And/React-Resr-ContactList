@@ -1,22 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ContactItem.css";
+import {deleteContac} from '../../../Actions/ContactListActions';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import deleteData from './DeleteContactItem';
+
 
 class ContactItem extends React.Component {
   state = {
+    id: this.props.id,
     name: this.props.name,
+    surname: this.props.surname,
     role: this.props.role,
     avatar: this.props.avatar,
-    created: this.props.created,
+    // created: this.props.created,
     status: this.props.status,
     email: this.props.email,
     gender: this.props.gender,
   };
-  render() {
-    const { avatar, role, name, email, created, gender } = this.state;
-    const { status } = this.props;
 
-    const { onStatusChange, onDelete } = this.props;
+
+  render() {
+    const { id, avatar, role, name, email, gender } = this.state;
+    const { status } = this.props;
+    // const { onStatusChange} = this.props;
 
     const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
 
@@ -36,22 +44,16 @@ class ContactItem extends React.Component {
           </a>
           <span className="user-subhead">{role}</span>
         </td>
-        <td>{created}</td>
+        <td></td>
         <td className="text-center">
-          <span className={statusStyle} onClick={onStatusChange}>
+
             {status}
-          </span>
+          
         </td>
         <td>
           <a href="#">{email}</a>
         </td>
         <td>
-          <a href="#" className="table-link">
-            <span className="fa-stack">
-              <i className="fa fa-square fa-stack-2x"></i>
-              <i className="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
           <Link to="/edit" className="table-link" onClick={this.props.onEdit}>
             <span className="fa-stack">
               <i className="fa fa-square fa-stack-2x"></i>
@@ -59,7 +61,8 @@ class ContactItem extends React.Component {
             </span>
           </Link>
           <a href="#" className="table-link danger">
-            <span className="fa-stack" onClick={onDelete}>
+            {/* <span className="fa-stack" onClick={() => deleteData(id)}> */}
+            <span className="fa-stack" onClick={() => this.props.deleteContac(id)}>
               <i className="fa fa-square fa-stack-2x"></i>
               <i className="fa fa-trash-o fa-stack-1x fa-inverse"></i>
             </span>
@@ -70,4 +73,10 @@ class ContactItem extends React.Component {
   }
 }
 
-export default ContactItem;
+
+
+function mapDispatchToProps (dispatch){
+  return bindActionCreators({deleteContac: deleteContac},dispatch);
+}
+
+export default connect( undefined, mapDispatchToProps)(ContactItem);

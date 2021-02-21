@@ -3,6 +3,7 @@ const initialState = {
   currentContact: [],
   loading: true,
   contact:[],
+  contactId: null,
 };
 
 const contactListReducer = (state = initialState, action) => {
@@ -20,13 +21,13 @@ const contactListReducer = (state = initialState, action) => {
         loading: false,
         currentContact: action.payload,
       };
-    // case "ADD_CONTACT_LIST":
-    //   // console.log("Reducer => ", action.payload);
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     contact: action.payload,
-    //   };
+    case "DELETE_CONTACT":
+      // console.log("Reducer => ", action.payload);
+
+      return {
+        ...state,
+        contactId: action.payload,
+      };
     default:
       return {
         state,
