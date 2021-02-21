@@ -19,9 +19,9 @@ class Header extends React.Component {
         <Row>
           <Col>
             <Navbar bg="dark" variant="dark">
-              <Navbar.Brand>
+              {/* <Navbar.Brand>
                 <Link to="/">Navbar</Link>
-              </Navbar.Brand>
+              </Navbar.Brand> */}
               <Nav className="mr-auto">
                 <Nav.Link>
                   <Link to="/">Home</Link>

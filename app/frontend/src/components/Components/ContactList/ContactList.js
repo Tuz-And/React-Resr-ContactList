@@ -69,6 +69,7 @@ class ContactList extends React.Component {
                   <table className="table user-list">
                     <thead>
                       <tr>
+                        <h></h>
                         <th>
                           <span>User</span>
                         </th>
@@ -92,9 +93,9 @@ class ContactList extends React.Component {
                               key={item.id}
                               id={item.id}
                               name={item.name}
+                              surname={item.surname}
                               role={item.role}
                               avatar={item.avatar}
-                              created={item.created}
                               status={item.status}
                               email={item.email}
                               gender={item.gender}

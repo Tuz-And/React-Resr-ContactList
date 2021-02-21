@@ -87,13 +87,13 @@ class AddContact extends React.Component {
       <div className="container">
         <div className="row">
           <Header />
-          <div className="col-md-12">
+          <div className="col-md-offset-3 col-6  ">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control mt-5"
                     placeholder="Name"
                     onChange={this.getName}
                   />
@@ -155,7 +155,7 @@ class AddContact extends React.Component {
 
               <div className="form-group">
                 <div>
-                  <button type="submit" className="btn btn-default">
+                  <button type="submit" className="btn btn-success">
                     Add contact
                   </button>
                 </div>

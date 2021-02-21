@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import Header from '../Header/header'
 
 class EditContact extends React.Component {
   state = {
@@ -7,7 +8,6 @@ class EditContact extends React.Component {
     name: this.props.currentContact.name,
     role: this.props.currentContact.role,
     avatar: this.props.currentContact.avatar,
-    created: this.props.currentContact.created,
     status: this.props.currentContact.status,
     email: this.props.currentContact.email,
     gender: this.props.currentContact.gender,
@@ -55,7 +55,7 @@ class EditContact extends React.Component {
       status,
       email,
       gender,
-      created,
+      
       id,
     } = this.state;
     this.props.onEditCurrentContact(
@@ -65,7 +65,7 @@ class EditContact extends React.Component {
       status,
       email,
       gender,
-      created,
+      
       id
     );
     this.setState({
@@ -74,89 +74,82 @@ class EditContact extends React.Component {
   };
 
   render() {
-    const { avatar, role, name, status, email, created, gender } = this.state;
-    if (this.state.isRedirect) {
-      return <Redirect to="/" />;
-    }
+    // if (this.state.isRedirect) {
+    //   return <Redirect to="/" />;
+    // }
     return (
       <div className="container">
         <div className="row">
+          <Header />
           <div className="col-md-12">
-            <form onSubmit={this.onSendData}>
-              <div class="form-group">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    value={name}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Name"
                     onChange={this.getName}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    value={role}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Role"
                     onChange={this.getRole}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="number"
-                    value={avatar}
                     min="1"
                     max="99"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Avatar"
                     onChange={this.getAvatar}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
-                    placeholder="Status"
-                    onChange={this.getStatus}
-                    value={status}
+                    placeholder="surname"
+                    onChange={this.getSurname}
                   />
                 </div>
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
-                    value={email}
+                    className="form-control"
                     placeholder="Email"
                     onChange={this.getEmail}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Gender"
-                    value={gender}
                     onChange={this.getGender}
                   />
                 </div>
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <div>
-                  <button type="submit" class="btn btn-default">
-                    Edit contact
+                  <button type="submit" className="btn btn-default">
+                    Add contact
                   </button>
                 </div>
               </div>
