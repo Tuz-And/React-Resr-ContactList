@@ -11,3 +11,11 @@ export const getCurrentContact = (currentContact) => {
     payload: currentContact,
   };
 };
+
+
+// export const addContactList = (contact) => {
+//   return {
+//     type: "ADD_CONTACT_LIST",
+//     payload: contact,
+//   };
+// };

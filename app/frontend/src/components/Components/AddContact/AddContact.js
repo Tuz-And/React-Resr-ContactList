@@ -7,19 +7,22 @@ import Header from "../Header/header";
 class AddContact extends React.Component {
   state = {
     name: "",
+    surname: "",
     role: "",
     avatar: "",
-    created: "",
-    status: "",
+    status: "activ",
+   
     email: "",
     gender: "",
-    isRedirect: false,
+    // isRedirect: false,
+
   };
 
   getName = (event) => {
     this.setState({
       name: event.target.value,
     });
+    console.log(this.state.name)
   };
   getRole = (event) => {
     this.setState({
@@ -31,9 +34,9 @@ class AddContact extends React.Component {
       avatar: event.target.value,
     });
   };
-  getStatus = (event) => {
+  getSurname = (event) => {
     this.setState({
-      status: event.target.value,
+      surname: event.target.value,
     });
   };
   getEmail = (event) => {
@@ -48,94 +51,133 @@ class AddContact extends React.Component {
     });
   };
 
-  onSendData = (event) => {
+  // onSendData = (event) => {
+  //   event.preventDefault();
+  //   const { name, role, avatar, surname, email, gender } = this.state;
+  //   this.props.onCreate(name, role, avatar, surname, email, gender);
+  //   this.setState({
+  //     isRedirect: true,
+  //   });
+  // };
+
+
+  handleSubmit = (event) => {
+    //alert('A list was submitted: ' + this.state.formvalue);
     event.preventDefault();
-    const { name, role, avatar, status, email, gender } = this.state;
-    this.props.onCreate(name, role, avatar, status, email, gender);
-    this.setState({
-      isRedirect: true,
-    });
-  };
+    // const { name, role, avatar, surname, email, gender } = this.state;
+    // this.setState({
+        //   isRedirect: true,
+        // });
+    console.log('+++++++++++++++', this.state.name)
+      
+    fetch('http://localhost:8000/api/contacts/', {
+        method: 'POST',
+        headers: {
+                "Content-Type": "application/json",
+              },
+       body: JSON.stringify(this.state
+          // {
+        // name: this.state.name,
+        // role: this.state.role,
+        // avatar: this.state.avatar,
+        // surname: this.state.surname,
+        // status: this.state.status,
+        // email: this.state.email,
+        // gender: this.state.gender,
+  
+      // }
+      )
+   })
+   .then(function(response) {
+    console.log(response)
+    return response.json();
+  });
+  //  .then(res => res.json())
+  //  .then(data => console.log(data))
+  //  .catch(err => console.log(err));
+  }
+
 
   render() {
-    if (this.state.isRedirect) {
-      return <Redirect to="/" />;
-    }
+    // if (this.state.isRedirect) {
+    //   return <Redirect to="/" />;
+    // }
     return (
       <div className="container">
         <div className="row">
           <Header />
           <div className="col-md-12">
-            <form onSubmit={this.onSendData}>
-              <div class="form-group">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Name"
                     onChange={this.getName}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Role"
                     onChange={this.getRole}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="number"
                     min="1"
                     max="99"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Avatar"
                     onChange={this.getAvatar}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
-                    placeholder="Status"
-                    onChange={this.getStatus}
+                    className="form-control"
+                    placeholder="surname"
+                    onChange={this.getSurname}
                   />
                 </div>
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Email"
                     onChange={this.getEmail}
                   />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Gender"
                     onChange={this.getGender}
                   />
                 </div>
               </div>
 
-              <div class="form-group">
+              <div className="form-group">
                 <div>
-                  <button type="submit" class="btn btn-default">
+                  {/* <button type="submit" className="btn btn-default">
                     Add contact
-                  </button>
+                  </button> */}
+                  <input type="submit" value="Submit" />
                 </div>
               </div>
             </form>
